@@ -6,6 +6,7 @@ const teams = ref([]);
 const selectedTeam = ref(null);
 const newScore = ref('');
 
+
 //haal alle scores op
 const fetchScore = async () => {
   try{
@@ -26,6 +27,41 @@ const fetchTeams = async () => {
     teams.value = data.data.teams;
   } catch (err) {
     console.log(err);
+  }
+};
+
+// update de score op basis van het geselecteerde team
+const updateScore = async () => {
+  try {
+    // Controleer of een team is geselecteerd
+    if (!selectedTeam.value) {
+      console.error('Geen team geselecteerd voor update');
+      return;
+    }
+
+    // Zoek de score op basis van het geselecteerde team
+    const selectedScore = scores.value.find(score => score.team === selectedTeam.value);
+
+    if (!selectedScore) {
+      console.error('Kan de score niet vinden voor het geselecteerde team');
+      return;
+    }
+
+    // Stuur een PUT-verzoek om de score bij te werken
+    const response = await fetch(`http://localhost:3000/api/v1/scores/${selectedScore._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ score: newScore.value, team: selectedTeam.value }),
+    });
+
+    const data = await response.json();
+
+    // Reset het nieuwe scores invoerveld
+    newScore.value = '';
+  } catch (error) {
+    console.error('Fout bij het bijwerken van de score:', error);
   }
 };
 
