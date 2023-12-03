@@ -10,7 +10,7 @@ const newScore = ref('');
 //haal alle scores op
 const fetchScore = async () => {
   try{
-    const response = await fetch('http://localhost:3000/api/v1/scores');
+    const response = await fetch('https://lab6-ej2l.onrender.com/api/v1/scores');
     const data = await response.json();
     scores.value = data.data.scores;
     teams.value = data.data.teams;
@@ -22,7 +22,7 @@ const fetchScore = async () => {
 //haal alle teams op
 const fetchTeams = async () => {
   try {
-    const response = await fetch('http://localhost:3000/api/v1/teams');
+    const response = await fetch('https://lab6-ej2l.onrender.com/api/v1/teams');
     const data = await response.json();
     teams.value = data.data.teams;
   } catch (err) {
@@ -48,7 +48,7 @@ const updateScore = async () => {
     }
 
     // Stuur een PUT-verzoek om de score bij te werken
-    const response = await fetch(`http://localhost:3000/api/v1/scores/${selectedScore._id}`, {
+    const response = await fetch(`https://lab6-ej2l.onrender.com/api/v1/scores/${selectedScore._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
