@@ -102,14 +102,23 @@ onMounted(() => {
     <h2 class="scorelist__title">Score list</h2>
     <h2 class="scorelist__update-title">Update the scores</h2>
     <div class="scorelist__update-form">
-      <!--Add een dropdown box where I can select a team-->
-      <select v-model="selectedTeam">
-        <option v-for="team in teams" :key="team.team" :value="team.team">
-          {{ team.team }}
-        </option>
-      </select>
-      <input type="text" v-model="newScore" />
-      <button @click="updateScore">Update</button>
+      <div class="scorelist__form-group">
+        <label for="team-select" class="scorelist__form-label">Select team</label>
+        <!--Add een dropdown box where I can select a team-->
+        <select id="team-select" v-model="selectedTeam">
+          <label for="team-select" class="scorelist__form-label">Select team</label>
+          <option v-for="team in teams" :key="team.team" :value="team.team">
+            {{ team.team }}
+          </option>
+        </select>
+      </div>
+      <div class="scorelist__form-group">
+        <label for="score-input" class="scorelist__form-label">Add score</label>
+        <input id="score-input" type="text" v-model="newScore" placeholder="00"/>
+      </div>
+      <div class="scorelist_form-group">
+        <button @click="updateScore">Update</button>
+      </div>
     </div>
     <h2 class="scorelist__scores-title">SCORES:</h2>
     <div>
@@ -144,6 +153,7 @@ onMounted(() => {
 
 .scorelist__update-form {
   display: flex;
+  align-items: flex-end;
   justify-content: space-between;
   margin-bottom: 2em;
   background-color: #242424;
@@ -154,23 +164,37 @@ onMounted(() => {
 .scorelist__update-form select,
 .scorelist__update-form input,
 .scorelist__update-form button {
-  flex: 1;
   margin-right: 1em;
   padding: 0.5em;
   border: none;
   border-radius: 5px;
+}
+.scorelist__update-form select,
+.scorelist__update-form input {
+  flex: 1;
 }
 
 .scorelist__update-form button {
   cursor: pointer;
   background-color: #007BFF;
   color: white;
+  padding: 0.5em 2em;
 }
 
 .scorelist__update-form button:hover {
   background-color: #0056b3;
 }
+.scorelist__form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-right: 1em;
+}
 
+.scorelist__form-label {
+  margin-bottom: 0.5em;
+  color: #fff;
+}
 .scorelist__scores {
   list-style: none;
   padding: 0;
