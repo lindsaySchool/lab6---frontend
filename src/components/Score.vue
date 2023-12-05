@@ -9,7 +9,7 @@ const newScore = ref('');
 
 
 // Maak een nieuwe Primus-verbinding
-let primus = new Primus("http://localhost:3000");
+let primus = new Primus("https://lab6-ej2l.onrender.com/api/v1/scores");
 
 primus.on('open', function () {
   console.log("Connection is open");
