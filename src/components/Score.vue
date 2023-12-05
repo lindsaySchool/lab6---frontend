@@ -98,9 +98,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <h1>ScoreList</h1>
-    <div class="updateScore">
+  <div class="scorelist">
+    <h2 class="scorelist__title">Score list</h2>
+    <h2 class="scorelist__update-title">Update the scores</h2>
+    <div class="scorelist__update-form">
       <!--Add een dropdown box where I can select a team-->
       <select v-model="selectedTeam">
         <option v-for="team in teams" :key="team.team" :value="team.team">
@@ -110,9 +111,10 @@ onMounted(() => {
       <input type="text" v-model="newScore" />
       <button @click="updateScore">Update</button>
     </div>
+    <h2 class="scorelist__scores-title">SCORES:</h2>
     <div>
-      <ul>
-        <li v-for="score in scores" :key="score._id">
+      <ul class="scorelist__scores">
+        <li v-for="score in scores" :key="score._id" class="scorelist__scores-item">
           {{ score.team }}: {{ score.score }}
         </li>
       </ul>
@@ -121,4 +123,64 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.scorelist {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.scorelist__title {
+  text-align: center;
+  color: #fff;
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+.scorelist__update-title,
+.scorelist__scores-title {
+  color: #fff;
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.scorelist__update-form {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2em;
+  background-color: #242424;
+  padding: 1em;
+  border-radius: 5px;
+}
+
+.scorelist__update-form select,
+.scorelist__update-form input,
+.scorelist__update-form button {
+  flex: 1;
+  margin-right: 1em;
+  padding: 0.5em;
+  border: none;
+  border-radius: 5px;
+}
+
+.scorelist__update-form button {
+  cursor: pointer;
+  background-color: #007BFF;
+  color: white;
+}
+
+.scorelist__update-form button:hover {
+  background-color: #0056b3;
+}
+
+.scorelist__scores {
+  list-style: none;
+  padding: 0;
+}
+
+.scorelist__scores-item {
+  padding: 1em;
+  border-bottom: 1px solid #333;
+  background-color: #242424;
+  margin-bottom: 1em;
+  border-radius: 5px;
+}
 </style>
